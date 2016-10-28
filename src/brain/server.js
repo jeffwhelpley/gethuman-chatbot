@@ -21,7 +21,9 @@ function start(botHandlers, actionHandlers, config) {
   addTestRoutes(app);
 
   // all bots go to this route
-  app.post('/gethuman', handleRequest(botHandlers, actionHandlers, config));
+  app.post('/:bot', handleRequest(botHandlers, actionHandlers, config));
+
+    //    yourapi.com/messenger  yourapi.com/gethuman - slack
 
   // FB version (switch facebook to just /gethuman)
   // app.post('/v3/gethuman', handleRequest(botHandlers, actionHandlers));
@@ -82,26 +84,31 @@ function handleRequest(botHandlers, actionHandlers, config) {
     var botHandler = factory.getBotHandler(botHandlers, context);
 
     // use the bot handler to translate the context into a generic request format
-    var genericRequest = botHandler.translateRequestToGenericFormat(context);
+    // var genericRequest = botHandler.translateRequestToGenericFormat(context);
+    var genericRequests = botHandler.translateRequestToGenericFormats(context);
 
-    // figure out which action handler to use based on the generic request
-    var actionHandler = factory.getActionHandler(actionHandlers, genericRequest);
+    genericRequests.forEach((genericRequest) => {
 
-    // use the action handler to process the request (i.e. call GH API, etc.)
-    actionHandler.processRequest(genericRequest)
-      .then(function (genericResponse) {
+      // figure out which action handler to use based on the generic request
+      var actionHandler = factory.getActionHandler(actionHandlers, genericRequest);
 
-        // create payloads to be sent back to the platform from the generic response
-        var payloads = botHandler.generateResponsePayloads(genericResponse);
+      // use the action handler to process the request (i.e. call GH API, etc.)
+      actionHandler.processRequest(genericRequest)
+          .then(function (genericResponse) {
 
-        // finally send the payloads back to the platform
-        return sendResponse(genericResponse, payloads);
-      })
-      .catch(function (err) {
+            // create payloads to be sent back to the platform from the generic response
+            var payloads = botHandler.generateResponsePayloads(genericResponse);
 
-        // generically send error response back to client
-        sendErrorResponse(err, context);
-      });
+            // finally send the payloads back to the platform
+            return sendResponse(genericResponse, payloads);
+          })
+          .catch(function (err) {
+
+            // generically send error response back to client
+            sendErrorResponse(err, context);
+          });
+    });
+
   }
 }
 

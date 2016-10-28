@@ -12,7 +12,12 @@ function getBotHandler(handlers, context) {
 }
 
 // not yet in use
-function getActionHandler(actionHandlers) {
+function getActionHandler(actionHandlers, genericRequest) {
+
+  if (genericRequest) {
+
+  }
+
   return actionHandlers && actionHandlers.length && actionHandlers[0];
 }
 
