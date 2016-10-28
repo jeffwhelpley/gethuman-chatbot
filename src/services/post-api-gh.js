@@ -1,10 +1,8 @@
-'use strict'
-
 const Q = require('q');
 const request = require('request');
 const config = require('../config/config');
 
-function findPostsofCompany(company) {
+function findByCompany(company) {
   var deferred = Q.defer();
   // var url = process.env.API_BASE_URL + '/posts';
   var url = config.ghApiBaseUrl + '/posts';
@@ -34,6 +32,5 @@ function findPostsofCompany(company) {
 }
 
 module.exports = {
-  findPostsofCompany: findPostsofCompany
-}
-
+  findByCompany: findByCompany
+};

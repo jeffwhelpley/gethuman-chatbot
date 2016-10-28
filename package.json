@@ -1,7 +1,7 @@
 {
   "name": "gethuman-chatbot",
   "version": "1.0.0",
-  "description": "",
+  "description": "Chat bots for GetHuman",
   "main": "start.js",
   "scripts": {
     "test": "mocha test/**/*test.js -w"
@@ -13,11 +13,21 @@
     "express": "^4.14.0",
     "phone-formatter": "0.0.2",
     "q": "^1.4.1",
-    "request": "^2.75.0",
-    "request-promise": "^4.1.1"
+    "request": "^2.75.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "eslint": "^3.8.1",
+    "eslint-config-google": "^0.7.0",
+    "eslint-plugin-import": "^2.0.1",
     "mocha": "^3.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/Whelpley/gethuman-chatbot.git"
+  },
+  "engines": {
+    "node": "6.8.1",
+    "npm": "3.10.8"
   }
 }

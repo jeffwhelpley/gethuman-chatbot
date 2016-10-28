@@ -1,9 +1,3 @@
-'use strict'
-
-const request = require('request');
-const Q = require('q');
-const utilities = require('../services/utilities');
-const config = require('../config/config');
 
 // unit testable
 function isHandlerForRequest(context) {
@@ -19,7 +13,7 @@ function verify() {
 
 // what needs to be known before processing?
 // should this extract more from the context rather than keep passing it around?{}
-function translateRequestToCommonFormat(context) {
+function translateRequestToGenericFormat(context) {
   var commonRequest = {
     context: context
   };
@@ -30,7 +24,7 @@ function translateRequestToCommonFormat(context) {
   return commonRequest;
 }
 
-function translateCommonResponseToPlatform(commonResponse) {
+function translateGenericResponseToPlatform(commonResponse) {
   var botSpecificResponse = {
     payloads:  [],
     context: commonResponse.context
@@ -188,6 +182,6 @@ module.exports = {
   sendResponseToPlatform: sendResponseToPlatform,
   sendErrorResponse: sendErrorResponse,
   verify: verify,
-  translateRequestToCommonFormat: translateRequestToCommonFormat,
-  translateCommonResponseToPlatform: translateCommonResponseToPlatform
-}
+  translateRequestToGenericFormat: translateRequestToGenericFormat,
+  translateGenericResponseToPlatform: translateGenericResponseToPlatform
+};

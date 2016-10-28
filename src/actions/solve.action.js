@@ -1,5 +1,3 @@
-'use strict'
-
 const request = require('request');
 const Q = require('q');
 const companySearch = require('../services/company-api-gh');
@@ -12,6 +10,8 @@ function processRequest(commonRequest) {
     context: commonRequest.context
   };
   var userInput = commonRequest.userInput;
+
+  // todo: do pre-response here
 
   if (!userInput) {
     return commonResponse;

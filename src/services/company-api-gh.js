@@ -1,10 +1,14 @@
-'use strict'
-
 const Q = require('q');
 const request = require('request');
 const config = require('../config/config');
 
-function findAllByText(textInput) {
+/**
+ * Find all companies that match given text input
+ *
+ * @param textInput
+ * @returns {*|promise}
+ */
+function findByText(textInput) {
   var deferred = Q.defer();
   // var url = process.env.API_BASE_URL + '/companies/search';
   var url = config.ghApiBaseUrl + '/companies/search';
@@ -28,5 +32,5 @@ function findAllByText(textInput) {
 }
 
 module.exports = {
-  findAllByText: findAllByText
-}
+  findByText: findByText
+};
